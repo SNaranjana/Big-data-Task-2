@@ -141,7 +141,7 @@ Here:
 
 ---
 
-# 7. 🔄 Project Workflow
+# 7.  Project Workflow
 
 The project follows these steps:
 
@@ -179,7 +179,7 @@ Find Useful Insights
 
 ---
 
-# 8. 📥 Load the Dataset
+# 8.  Load the Dataset
 
 The first step is loading the CSV dataset.
 
@@ -322,100 +322,98 @@ converts it into a proper date format.
 
 This allows us to perform date calculations.
 
----
 
-# 13. 🚚 Convert Ship Date
+
+# 13.  Convert Ship Date
 
 The `Ship Date` column is also converted.
 
-```python
+ python
 df['Ship Date'] = pd.to_datetime(df['Ship Date'])
-```
+
 
 Now both:
 
-```text
+ text
 Order Date
 Ship Date
-```
+
 
 are in datetime format.
 
----
 
-# 14. ⏱️ Calculate Delivery Days
+# 14. Calculate Delivery Days
 
 The project creates a new column:
 
-```python
+python
 df['Delivery Days'] = (
     df['Ship Date'] - df['Order Date']
 ).dt.days
-```
 
-### What does this mean?
+
+# What does this mean?
 
 It calculates how many days were taken to ship an order.
 
-### Formula
+# Formula
 
-```text
+ text
 Delivery Days =
 Ship Date - Order Date
-```
 
-### Example
+
+#  Example
 
 Suppose:
 
-```text
+  text
 Order Date = January 1
 Ship Date  = January 4
-```
+
 
 Then:
 
-```text
+ text
 Delivery Days = 3
-```
+
 
 So the new column tells us how many days each order took to ship.
 
----
 
-# 15. 🏷️ Find Product Categories
+
+# 15.  Find Product Categories
 
 The project checks the unique categories using:
 
-```python
+  python
 df['Category'].unique()
-```
 
-### What is `unique()`?
+
+# What is `unique()`?
 
 `unique()` returns different values without repeating them.
 
 For example:
 
-```text
+ text
 Technology
 Furniture
 Office Supplies
-```
 
 This helps us understand the categories available in the dataset.
 
----
 
-# 16. ❌ Check Missing Values
+
+# 16.  Check Missing Values
 
 The project checks missing values using:
 
-```python
+ python
 df.isnull().sum()
-```
 
-### Explanation
+
+# Explanation
 
 `isnull()` checks whether a value is missing.
 
@@ -423,63 +421,62 @@ df.isnull().sum()
 
 So:
 
-```python
+ python
 df.isnull().sum()
-```
+
 
 gives the number of missing values in each column.
 
-### Why is this important?
+# Why is this important?
 
 Missing values can affect analysis.
 
 Before performing analysis, it is important to know whether the dataset contains missing data.
 
----
 
-# 17. 💰 Sales Analysis
+
+# 17. Sales Analysis
 
 One important part of the project is analyzing sales.
 
 We calculate total sales for each category.
 
-```python
+ python
 category_sales = (
     df.groupby('Category')['Sales'].sum()
 )
-```
 
-### Explanation
+
+# Explanation
 
 First:
 
-```python
+ python
 df.groupby('Category')
-```
+
 
 groups the data according to category.
 
 Then:
 
-```python
+ python
 ['Sales'].sum()
-```
+
 
 calculates the total sales.
 
 The result is stored in:
 
-```text
+ text
 category_sales
-```
 
----
 
-# 18. 📊 Sales by Category
+
+# 18. Sales by Category
 
 A bar chart is used to visualize category-wise sales.
 
-```python
+ python
 category_sales.plot(
     kind='bar',
     figsize=(8,5)
@@ -488,25 +485,25 @@ category_sales.plot(
 plt.title("Sales by Category")
 plt.ylabel("Total Sales")
 plt.show()
-```
 
-### Why use a bar chart?
+
+# Why use a bar chart?
 
 A bar chart makes it easy to compare categories.
 
 For example:
 
-```text
+ text
 Category A  █████████
 Category B  ███████
 Category C  ███████████
-```
+
 
 A taller bar means higher sales.
 
----
 
-# 19. 📈 Sales Distribution
+
+# 19.  Sales Distribution
 
 The project uses a histogram to understand sales distribution.
 
@@ -520,7 +517,7 @@ sns.histplot(
 
 plt.title("Sales Distribution")
 plt.show()
-```
+
 
 ### What is a histogram?
 
@@ -536,19 +533,18 @@ Number of Orders
       │ ███████████
       └────────────────
           Sales
-```
+
 
 It helps us understand the distribution of sales.
 
----
 
-# 20. 💵 Profit Analysis
+# 20. Profit Analysis
 
 Profit is another important part of the project.
 
 The project creates a bar plot to compare profit by category.
 
-```python
+ python
 sns.barplot(
     data=df,
     x="Category",
@@ -557,9 +553,9 @@ sns.barplot(
 
 plt.title("Profit by Category")
 plt.show()
-```
 
-### Purpose
+
+# Purpose
 
 This graph helps compare profit between categories.
 
@@ -569,13 +565,13 @@ We can easily see which category has:
 * Lower profit
 * Different profit levels
 
----
 
-# 21. 📊 Sales Distribution by Category
+
+# 21.  Sales Distribution by Category
 
 Another bar plot is used:
 
-```python
+ python
 sns.barplot(
     data=df,
     x="Category",
@@ -584,15 +580,15 @@ sns.barplot(
 
 plt.title("Sales Distribution by Category")
 plt.show()
-```
 
-### Purpose
+
+# Purpose
 
 This graph helps us visually compare sales values among categories.
 
----
 
-# 22. 📦 Profit Distribution – Box Plot
+
+# 22. Profit Distribution – Box Plot
 
 The project uses a box plot:
 
@@ -604,9 +600,9 @@ sns.boxplot(
 
 plt.title("Profit Distribution")
 plt.show()
-```
 
-### What is a box plot?
+
+# What is a box plot?
 
 A box plot shows the distribution of numerical data.
 
@@ -618,9 +614,9 @@ It helps identify:
 * Spread
 * Possible outliers
 
-### Simple structure
+# Simple structure
 
-```text
+ text
 Maximum
    │
    ─
@@ -634,11 +630,8 @@ Maximum
    ─
    │
 Minimum
-```
 
----
-
-# 23. 📦 Profit Variation Across Categories
+# 23.  Profit Variation Across Categories
 
 The project also compares profit variation between categories.
 
@@ -651,9 +644,9 @@ sns.boxplot(
 
 plt.title("Profit Variation Across Categories")
 plt.show()
-```
 
-### Purpose
+
+# Purpose
 
 This graph helps us understand:
 
@@ -661,25 +654,24 @@ This graph helps us understand:
 * Which category has more consistent profit
 * Where possible outliers exist
 
----
 
-# 24. 🏷️ Discount Analysis
+# 24. Discount Analysis
 
 The project checks the different discount values using:
 
-```python
+  python
 df["Discount"].unique()
-```
+
 
 This shows the different discount levels present in the dataset.
 
----
 
-# 25. 📉 Discount vs Profit
+
+# 25. Discount vs Profit
 
 A scatter plot is used to analyze discount and profit.
 
-```python
+  python
 sns.scatterplot(
     data=df,
     x="Discount",
@@ -688,7 +680,7 @@ sns.scatterplot(
 
 plt.title("Impact of Discount on Profit")
 plt.show()
-```
+
 
 ### What is a scatter plot?
 
@@ -696,10 +688,10 @@ A scatter plot displays individual data points.
 
 Here:
 
-```text
+text
 X-axis → Discount
 Y-axis → Profit
-```
+
 
 Each point represents a data record.
 
@@ -707,19 +699,19 @@ Each point represents a data record.
 
 The graph helps us visually study whether changes in discount are associated with changes in profit.
 
----
 
-# 26. 🔢 Select Numerical Columns
+
+# 26.  Select Numerical Columns
 
 For correlation analysis, numerical columns are selected.
 
-```python
+python
 numeric_df = df.select_dtypes(
     include="number"
 )
-```
 
-### What does this do?
+
+# What does this do?
 
 It selects only numerical columns.
 
@@ -733,51 +725,51 @@ Examples include:
 
 depending on the columns available in the dataset.
 
----
 
-# 27. 🔗 Calculate Correlation
+
+# 27.  Calculate Correlation
 
 The project calculates correlation using:
 
-```python
+python
 corr = numeric_df.corr()
-```
 
-### What is correlation?
+
+# What is correlation?
 
 Correlation tells us how two numerical variables are related.
 
 The value generally ranges from:
 
-```text
+ text
 -1 to +1
-```
 
-### Simple explanation
 
-```text
+# Simple explanation
+
+ text
 +1  → Strong positive relationship
 
  0  → Little/no linear relationship
 
 -1  → Strong negative relationship
-```
 
-### Positive correlation
+
+# Positive correlation
 
 When one variable increases, another tends to increase.
 
-### Negative correlation
+# Negative correlation
 
 When one variable increases, another tends to decrease.
 
----
 
-# 28. 🌡️ Correlation Heatmap
+
+# 28.  Correlation Heatmap
 
 The correlation values are visualized using:
 
-```python
+python
 sns.heatmap(
     corr,
     annot=True
@@ -785,9 +777,9 @@ sns.heatmap(
 
 plt.title("Correlation Heatmap")
 plt.show()
-```
 
-### What is a heatmap?
+
+# What is a heatmap?
 
 A heatmap represents numerical values using different visual intensities.
 
@@ -795,18 +787,18 @@ The `annot=True` option displays the actual correlation value.
 
 For example:
 
-```text
+text
              Sales   Profit   Discount
 Sales         1.00    0.48      -0.10
 Profit        0.48    1.00      -0.22
 Discount     -0.10   -0.22       1.00
-```
+
 
 The exact values depend on the dataset.
 
----
 
-# 29. 📊 Visualizations Used
+
+# 29.  Visualizations Used
 
 The project uses several visualization techniques.
 
@@ -818,59 +810,59 @@ The project uses several visualization techniques.
 | Scatter Plot  | Study relationship between variables |
 | Heatmap       | Study correlations                   |
 
----
 
-# 30. 🧠 What We Learn From This Project
+
+# 30. What We Learn From This Project
 
 This project helps us understand how to perform a complete basic data analysis workflow.
 
-### Step 1
+#Step 1
 
 Load the dataset.
 
-### Step 2
+#Step 2
 
 Understand the dataset.
 
-### Step 3
+#Step 3
 
 Check missing values.
 
-### Step 4
+#Step 4
 
 Prepare date columns.
 
-### Step 5
+#Step 5
 
 Create a new feature called `Delivery Days`.
 
-### Step 6
+#Step 6
 
 Analyze sales.
 
-### Step 7
+#Step 7
 
 Analyze profit.
 
-### Step 8
+#Step 8
 
 Analyze discount.
 
-### Step 9
+#Step 9
 
 Calculate correlations.
 
-### Step 10
+#Step 10
 
 Create graphs to understand the results.
 
----
 
-# 31. 📁 Project Folder Structure
+
+# 31.  Project Folder Structure
 
 The recommended GitHub folder structure is:
 
-```text
+  text
 Task-2-Superstore-Analysis/
 │
 ├── README.md
@@ -888,11 +880,9 @@ Task-2-Superstore-Analysis/
     ├── profit_variation.png
     ├── discount_vs_profit.png
     └── correlation_heatmap.png
-```
 
----
 
-# 32. ▶️ How to Run the Project
+# 32. How to Run the Project
 
 ## Google Colab
 
@@ -904,99 +894,97 @@ Open Google Colab.
 
 Upload:
 
-```text
+text
 Task 2.ipynb
-```
+
 
 ### Step 3
 
 Upload:
 
-```text
+text
 samplesuperstore.csv
-```
+
 
 ### Step 4
 
 Run the cells one by one.
 
----
+
 
 ## Jupyter Notebook
 
 Install the required libraries:
 
-```bash
+bash
 pip install pandas numpy matplotlib seaborn
-```
+
 
 Then open Jupyter Notebook:
 
-```bash
+bash
 jupyter notebook
-```
+
 
 Open:
 
-```text
+text
 Task 2.ipynb
-```
+
 
 Run all cells.
 
----
 
-# 33. 🧩 Important Python Concepts Used
+
+# 33.  Important Python Concepts Used
 
 This project demonstrates the following Python and Data Science concepts:
 
-### DataFrame
+# DataFrame
 
 A DataFrame is a table-like structure provided by Pandas.
 
-### `read_csv()`
+# `read_csv()`
 
 Used to read CSV files.
 
-### `head()`
+# `head()`
 
 Used to view the first rows.
 
-### `info()`
+# `info()`
 
 Used to understand dataset structure.
 
-### `describe()`
+# `describe()`
 
 Used for statistical summary.
 
-### `groupby()`
+# `groupby()`
 
 Used to group data.
 
-### `sum()`
+# `sum()`
 
 Used to calculate totals.
 
-### `unique()`
+# `unique()`
 
 Used to find unique values.
 
-### `isnull()`
+# `isnull()`
 
 Used to identify missing values.
 
-### `to_datetime()`
+# `to_datetime()`
 
 Used to convert values into date format.
 
-### `corr()`
+# `corr()`
 
 Used to calculate correlations.
 
----
-
-# 34. 🎓 Learning Outcomes
+# 34.  Learning Outcomes
 
 After completing this project, we can understand:
 
@@ -1015,37 +1003,37 @@ After completing this project, we can understand:
 * How to create a heatmap
 * How to perform basic Exploratory Data Analysis
 
----
 
-# 35. 🔮 Future Improvements
+
+# 35.  Future Improvements
 
 This project can be improved by adding:
 
-### 1. Monthly Sales Analysis
+# 1. Monthly Sales Analysis
 
 Analyze sales month by month.
 
-### 2. Yearly Sales Analysis
+# 2. Yearly Sales Analysis
 
 Compare sales between different years.
 
-### 3. Region Analysis
+# 3. Region Analysis
 
 Analyze sales and profit by region.
 
-### 4. State Analysis
+# 4. State Analysis
 
 Find states with higher sales and profit.
 
-### 5. Product Analysis
+# 5. Product Analysis
 
 Find the best-selling products.
 
-### 6. Customer Analysis
+# 6. Customer Analysis
 
 Analyze customer purchasing behavior.
 
-### 7. Interactive Dashboard
+# 7. Interactive Dashboard
 
 Create an interactive dashboard using:
 
@@ -1053,13 +1041,13 @@ Create an interactive dashboard using:
 * Streamlit
 * Power BI
 
-### 8. Machine Learning
+# 8. Machine Learning
 
 Future versions can use machine learning for sales prediction.
 
----
 
-# 36. ✅ Conclusion
+
+# 36. Conclusion
 
 The **Superstore Sales Data Analysis** project demonstrates how Python can be used to analyze business data.
 
@@ -1075,7 +1063,7 @@ Finally, numerical correlations are calculated and visualized using a heatmap.
 
 The complete process is:
 
-```text
+  text
 Load Data
    ↓
 Explore Data
@@ -1089,38 +1077,26 @@ Visualize Data
 Study Relationships
    ↓
 Generate Insights
-```
 
-This project is a good example of a basic **Data Analysis and Data Visualization project using Python**.
 
----
+# Output
 
-# 👩‍💻 Author
+<img width="992" height="716" alt="Screenshot 2026-08-11 103129" src="https://github.com/user-attachments/assets/ddf134c7-17e0-4997-931c-fc4fd90a26f3" />
+<img width="928" height="603" alt="Screenshot 2026-08-11 103227 - Copy" src="https://github.com/user-attachments/assets/015917cd-ef23-4f73-8356-e99f010680c0" />
+<img width="705" height="562" alt="Screenshot 2026-08-11 103257" src="https://github.com/user-attachments/assets/b4ebc1ad-db59-4445-b649-174317557642" />
+<img width="741" height="566" alt="Screenshot 2026-08-11 103321" src="https://github.com/user-attachments/assets/e4d6520c-446b-4d61-baf3-60ea54f467dc" />
+<img width="822" height="527" alt="Screenshot 2026-08-11 103330" src="https://github.com/user-attachments/assets/953098cf-5eb6-4854-a2c0-aa7b01a18c5c" />
+<img width="780" height="576" alt="Screenshot 2026-08-11 103408" src="https://github.com/user-attachments/assets/e0e362a2-c73c-41d3-a468-d43def37d460" />
+<img width="806" height="555" alt="Screenshot 2026-08-11 103426" src="https://github.com/user-attachments/assets/b2519d41-caa4-4e6f-9252-ef0b73b6b0b1" />
+<img width="860" height="641" alt="Screenshot 2026-08-11 103450" src="https://github.com/user-attachments/assets/c98a9d6c-b4ec-442a-acc6-2853ede1a979" />
 
-**S. Naranjana**
 
-**BCA – Artificial Intelligence & Machine Learning**
 
----
+ # Author
+ 
+S. Naranjana
 
-# ⭐ Project Keywords
+Course: Bachelor of Computer Applications
 
-```text
-Python
-Data Analysis
-Data Visualization
-Exploratory Data Analysis
-Pandas
-NumPy
-Matplotlib
-Seaborn
-Superstore Dataset
-Sales Analysis
-Profit Analysis
-Discount Analysis
-Correlation Analysis
-Jupyter Notebook
-Google Colab
-```
+College: Kamaraj College(Face prep campus)
 
--
